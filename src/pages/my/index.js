@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'dva';
-import { Modal } from 'antd-mobile';
+import { Modal, Toast } from 'antd-mobile';
 import NameCard from '../../components/name-card';
 import OrderStatus from '../../components/order-status';
 import router from 'umi/router';
@@ -14,12 +14,24 @@ class MyIndex extends Component {
       nowdata: 0,
       name: '登录/注册',
       avatar:'',
-      not_login: false
+      not_login: false,
+      userId: '',
     }
   }
   componentDidMount() {
     const { dispatch } = this.props;
+    this.setState({
+      userId: localStorage.getItem('user') ? Number(JSON.parse(localStorage.getItem('user'))): ''
+    })
+    // console.log(Number(JSON.parse(localStorage.getItem('user'))))
 
+  }
+  quitAccount = () => {
+    localStorage.removeItem('user');
+    Toast.success('退出登陆成功', 1)
+    this.setState({
+      userId: ''
+    })
   }
   linkurl(v){
     if (v === 'address') {
@@ -30,45 +42,57 @@ class MyIndex extends Component {
   }
   render() {
     const { my } = this.props;
-    const { not_login } = this.state;
+    const { userId } = this.state;
     return (
       <div className={styles.content_me}>
         <NameCard
-          name={not_login ? JSON.parse(localStorage.getItem('USER_INFO')).name : '登录/注册'}
+          name={userId ? userId : '登录/注册'}
           avatar={this.state.avatar}
-          notLogin={not_login ? 1 : 0}
+          notLogin={userId ? 1 : 0}
         />
-        { !my.list.data && <OrderStatus countList={0} />}
-        { my.list.data && <OrderStatus countList={my.list.data} />}
-        <div className={styles.service_info + ' ' + 'box_shadow'}>
-          <div className={styles.service_title + ' ' + 'border_bottommin'}>我的服务</div>
-          <div className={styles.service_content}>
-            <div className={styles.service_item} onClick={() => this.linkurl('account')}>
-              <img
-                className={styles.service_img}
-                src={require('../../assets/recycleH5_17.png')}
-                alt=""
-              />
-              <div className={styles.service_text}>收款方式</div>
+        {/* { !userId && <OrderStatus countList={0} />}
+        { userId && <OrderStatus countList={my.list.data} />} */}
+        {
+          userId && (
+            <div className={styles.service_info + ' ' + 'box_shadow'}>
+              <div className={styles.service_title + ' ' + 'border_bottommin'}>我的服务</div>
+              <div className={styles.service_content}>
+                <div className={styles.service_item} onClick={() => router.push("/shopCar")}>
+                  <img
+                    className={styles.service_img}
+                    src={require('../../assets/购物车icon.png')}
+                    alt=""
+                  />
+                  <div className={styles.service_text}>购物车</div>
+                </div>
+                <div className={styles.service_item} onClick={() => router.push("/animalList")}>
+                  <img
+                    className={styles.service_img}
+                    src={require('../../assets/recycleH5_18.png')}
+                    alt=""
+                  />
+                  <div className={styles.service_text}>宠物列表</div>
+                </div>
+                <div className={styles.service_item} onClick={() => router.push("/addAnimal")}>
+                  <img
+                    className={styles.service_img}
+                    src={require('../../assets/recycleH5_19.png')}
+                    alt=""
+                  />
+                  <div className={styles.service_text}>发布宠物</div>
+                </div>
+              </div>
             </div>
-            <div className={styles.service_item} onClick={() => this.linkurl('address')}>
-              <img
-                className={styles.service_img}
-                src={require('../../assets/recycleH5_18.png')}
-                alt=""
-              />
-              <div className={styles.service_text}>收货地址</div>
-            </div>
-            <div className={styles.service_item} onClick={() => {console.log('帮助中心')}}>
-              <img
-                className={styles.service_img}
-                src={require('../../assets/recycleH5_19.png')}
-                alt=""
-              />
-              <div className={styles.service_text}>帮助中心</div>
-            </div>
+          )
+        }
+        
+        { userId && 
+        <a onClick={this.quitAccount}>
+          <div className={styles.service_info + ' ' + 'box_shadow'}>
+            <div className={styles.quit_Button}>退出登陆</div>
           </div>
-        </div>
+        </a>}
+       
       </div>
     )
   }

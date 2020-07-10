@@ -18,9 +18,11 @@ class HomeTabbarCarousel extends Component{
   }
   render() {
     const { bannerItem } = this.props;
-    console.log(bannerItem)
+    // console.log(bannerItem[0].imageUrl)
     return (
-      <Carousel
+      <div>
+        {
+          this.props.isClass ? <Carousel
           autoplay={true}
           infinite
           selectedIndex={0}
@@ -33,7 +35,30 @@ class HomeTabbarCarousel extends Component{
             style={{ display: 'inline-block', width: '100%', height: this.state.imgHeight }}
           >
             <img
-              src={require('../../../assets/2c3968e33e2342feaa9fa3695b2e169e.png')}
+              src={require(index === 0 ? '../../../assets/商城轮播1.png' : '../../../assets/商城轮播2.png')}
+              alt=""
+              style={{ width: '100%', verticalAlign: 'top' }}
+              onLoad={() => {
+                window.dispatchEvent(new Event('resize'));
+                this.setState({ imgHeight: 'auto' });
+              }}
+            />
+          </a>
+        ))}
+      </Carousel> :<Carousel
+          autoplay={true}
+          infinite
+          selectedIndex={0}
+          className={styles.space_carousel}
+        >
+        {(this.props.bannerItem ? this.props.bannerItem : []).map((val,index)  => (
+          <a
+            key={index}
+            onClick={() => this.bannerLink(val.url)}
+            style={{ display: 'inline-block', width: '100%', height: this.state.imgHeight }}
+          >
+            <img
+              src={require(index === 0 ? '../../../assets/banner3.png' : '../../../assets/banner4.png')}
               alt=""
               style={{ width: '100%', verticalAlign: 'top' }}
               onLoad={() => {
@@ -44,6 +69,9 @@ class HomeTabbarCarousel extends Component{
           </a>
         ))}
       </Carousel>
+        }
+        
+      </div>
     )
   }
 }

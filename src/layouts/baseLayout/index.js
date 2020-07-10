@@ -14,7 +14,7 @@ const TabBarData = [
   },
   {
     id: 'class',
-    name: '分类',
+    name: '商城',
     icon: require('../../assets/recycleH5_03.png'),
     selectedicon: require('../../assets/recycleH5_06.png'),
     url: '/class',

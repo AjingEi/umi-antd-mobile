@@ -31,6 +31,17 @@
         }
       }
     }
+    .am-tabs-default-bar-tab-active {
+      color: #d46b08 !important;
+      // border-bottom: 1px solid #fa8c16 !important;
+    }
+    .am-tabs-default-bar-underline{
+      border: 1px solid #d46b08 !important;
+    }
+    .tabColor{
+      color: #fa8c16 !important;
+      background-color: #fa8c16;
+    }
     .stepBlock{
       background-color: #fff;
       height: 2.68rem;
@@ -59,18 +70,18 @@
           width: 100%;
           background: url(../../assets/recycleH5_apple.png) 0 center no-repeat;
           background-size: contain;
-          &.oppo{
-            background: url(../../assets/recycleH5_oppo.png) 0 center no-repeat;
-            background-size: contain;
-          }
-          &.vivo{
-            background: url(../../assets/recycleH5_vivo.png) 0 center no-repeat;
-            background-size: contain;
-          }
-          &.huawei{
-            background: url(../../assets/recycleH5_huawei.png) 0 center no-repeat;
-            background-size: contain;
-          }
+          // &.oppo{
+          //   background: url(../../assets/recycleH5_oppo.png) 0 center no-repeat;
+          //   background-size: contain;
+          // }
+          // &.vivo{
+          //   background: url(../../assets/recycleH5_vivo.png) 0 center no-repeat;
+          //   background-size: contain;
+          // }
+          // &.huawei{
+          //   background: url(../../assets/recycleH5_huawei.png) 0 center no-repeat;
+          //   background-size: contain;
+          // }
         }
       }
     }
@@ -86,30 +97,33 @@
         padding: .26rem .32rem;
       }
       .hotlist{
-        padding: .32rem;
+        padding: 0 .29rem;
         .itemBlock{
-          width: 47%;
+          // width: 47%;
           display: inline-block;
           box-shadow: #ccc 3px 2px 16px -4px;
-          padding: 0.3rem;
+          padding: 0.1rem;
           // height: 5.6rem;
           &:nth-child(2n+1){
-            margin-right: 4%;
+            margin-right: .1rem;
           }
           .product_img{
-            width: 2.7rem;
-            height: 2.7rem;
+            width: 3.2rem;
+            height: 4rem;
             margin: 0 auto;
             box-sizing: border-box;
             text-align: center;
             .img{
               width: 100%;
               height: 100%;
+              object-fit: cover;
+
             }
           }
           .text_ellipsis{
-            text-align: center;
+            // text-align: center;
             font-size: .28rem;
+            width: 3rem;
             color: #333;
             text-overflow: ellipsis;
             word-break: break-all;
@@ -120,119 +134,35 @@
             -webkit-box-orient: vertical;
             /*! autoprefixer: on */
             overflow: hidden;
-            height: 0.86rem;
+            // height: 0.56rem;
+            margin-top: .1rem;
           }
-          .priceBox{
-            text-align: center;
-            color:#999;
-            font-size: .26rem;
-            .price{
-              font-size: .3rem;
-              line-height: .26rem;
-              font-weight: bold;
-              color:#ea4b3b;
-              font-family:"DINPro-Bold";
+          .tagsList{
+            width: 3rem;
+            .tagItem{
+              display: inline-block;
+              border:1px solid #ffd591;
+              height: .35rem;
+              line-height: .35rem;
+              font-size: .15rem;
+              border-radius: 3px;
+              margin-left: 4px;
+              padding: 1px 4px;
             }
           }
           .btn {
-            width: 100%;
+            width: 50%;
             height: .58rem;
             line-height: .58rem;
             text-align: center;
             margin-top: .17rem;
-            background-image: linear-gradient(90deg, #FE8264 3%, #FF6262 100%);
+            // background-image: linear-gradient(90deg, #69c0ff 3%, #40a9ff 100%);
+            background-color: #fa8c16;
             border-radius: .12rem;
             font-family: PingFangHK-Regular;
             font-size: .28rem;
             color: #FFFFFF;
           }
-        }
-      }
-      .hotlist{
-        padding: .32rem;
-        .itemBlock{
-          width: 47%;
-          display: inline-block;
-          border-radius: .12rem;
-          box-shadow: #ccc 3px 2px 16px -4px;
-          padding: 0.3rem;
-          margin-bottom: .2rem;
-          // height: 5.6rem;
-          &:nth-child(2n+1){
-            margin-right: 5.2%;
-          }
-          .product_img{
-            width: 2.7rem;
-            height: 2.7rem;
-            margin: 0 auto;
-            box-sizing: border-box;
-            text-align: center;
-            .img{
-              width: 100%;
-              height: 100%;
-            }
-          }
-          .text_ellipsis{
-            text-align: center;
-            font-size: .28rem;
-            color: #333;
-            text-overflow: ellipsis;
-            word-break: break-all;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            /*! autoprefixer: off */
-            -moz-box-orient: vertical;
-            -webkit-box-orient: vertical;
-            /*! autoprefixer: on */
-            overflow: hidden;
-            height: 0.86rem;
-          }
-          .priceBox{
-            text-align: center;
-            color:#999;
-            font-size: .26rem;
-            .price{
-              font-size: .3rem;
-              line-height: .26rem;
-              font-weight: bold;
-              color:#ea4b3b;
-              font-family:"DINPro-Bold";
-            }
-          }
-          .btn {
-            width: 100%;
-            height: .58rem;
-            line-height: .58rem;
-            text-align: center;
-            margin-top: .17rem;
-            background-image: linear-gradient(90deg, #FE8264 3%, #FF6262 100%);
-            border-radius: .12rem;
-            font-family: PingFangHK-Regular;
-            font-size: .28rem;
-            color: #FFFFFF;
-          }
-        }
-      }
-    }
-    .itemListtitle{
-      position: relative;
-      padding-right: 2rem;
-      .gotoMore{
-        position: absolute;
-        right: .3rem;
-        top:0;
-        font-weight:400;
-        font-size: .28rem;
-        bottom: 0;
-        line-height: .98rem;
-        color: #999;
-        padding-right: .3rem;
-        img{
-          height: .28rem;
-          position: absolute;
-          right: 0;
-          top: 50%;
-          transform: translateY(-50%);
         }
       }
     }

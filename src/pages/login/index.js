@@ -23,7 +23,8 @@ class LoginNew extends React.Component {
       codeText: '获取验证码',
       isWait: false, // 是否在倒计时
       codeImageUrl: '', // 验证码图片
-      visible: false
+      visible: false,
+      isGetCode: false,
     };
     this.getCode = this.getCode.bind(this)
     this.submit = this.submit.bind(this)
@@ -92,7 +93,9 @@ class LoginNew extends React.Component {
       return false
     }
     if (!this.checkData()) return
-
+    this.setState({
+      isGetCode: true,
+    })
     Toast.success('验证码发送成功', 2);
     // 接口成功发送验证码并倒计时
     this.setTime()
@@ -103,7 +106,36 @@ class LoginNew extends React.Component {
    * @return {Boolean} 当信息不完整时退出
    */
   submit() {
-    router.push('/home')
+    // console.log(this.checkData())
+    if(this.checkData()){
+      if (!this.state.isGetCode) {
+        Toast.fail('短信验证码输入错误', 1);
+        return false;
+      }
+      if (!this.state.phoneCode) {
+        Toast.fail('请输入短信验证码', 1);
+        return false;
+      }
+      if (this.state.phoneCode != 1211) {
+        Toast.fail('短信验证码输入错误', 1);
+        return false;
+      }
+      let userList = Array.from(JSON.parse(localStorage.getItem('userList')));
+      if(!userList.some((item)=>{
+        if(item == this.state.phone) {
+          Toast.success('登陆成功', 1);
+          // router.push('/home')
+          return true;
+        }
+      })) {
+        Toast.success('注册成功', 1);
+        userList.push(this.state.phone);
+        localStorage.setItem('userList',JSON.stringify(userList))
+      }
+      localStorage.setItem('user',JSON.stringify(this.state.phone))
+      // console.log(this.state.phone, this.state.phoneCode)
+      router.push('/home')
+    }
   }
 
   /**
@@ -116,6 +148,7 @@ class LoginNew extends React.Component {
       return false
     }
     if (!/^1[3456789]\d{9}$/.test(this.state.phone)) {
+      // console.log(11)
       Toast.fail('请输入正确的手机号', 2);
       this.setState({ phoneError: true });
       return false
@@ -152,10 +185,10 @@ class LoginNew extends React.Component {
       <div className="login-bg">
         <div className="logo-wrap">
           <div className="logo"></div>
-          <div className="welcome-wrap">
+          {/* <div className="welcome-wrap">
             <div className="hello">您好!</div>
-            <div className="welcome">欢迎来到<span>UMI项目</span></div>
-          </div>
+            <div className="welcome">欢迎来到<span>宠物领养项目</span></div>
+          </div> */}
         </div>
         <div className="form-wraper">
           <div className={classNames('input-wrap')}>
@@ -282,7 +315,7 @@ class LoginNew extends React.Component {
           footer={[{ text: '确 定', onPress: () => { console.log('ok'); this.onClose('visible')(); } }]}
         >
           <div className="modal-coupon-center" style={{height: 360}}>
-            <iframe
+            {/* <iframe
               ref={(f) => {
                 this.iframe = f;
               }}
@@ -290,7 +323,9 @@ class LoginNew extends React.Component {
               height="100%"
               frameBorder={0}
               src="https://umijs.org/zh/guide/"
-            />
+            /> */}
+            <h2>用户注册协议</h2>
+            用户必须遵守》》》》》协议
           </div>
         </Modal>
       </div>
